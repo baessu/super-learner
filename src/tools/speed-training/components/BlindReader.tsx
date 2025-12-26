@@ -3,7 +3,6 @@
  * Anti-Regression 리더 뷰 컴포넌트
  */
 
-import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Pause, Play, Square, SkipBack } from 'lucide-react';
 import type { ParsedWord, TrainingMode, DropSetPhase } from '../types';
@@ -37,26 +36,15 @@ export function BlindReader({
   onStop,
   onReset,
 }: BlindReaderProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Auto-scroll to keep current word in view
-  useEffect(() => {
-    if (containerRef.current) {
-      const container = containerRef.current;
-      const targetScroll = currentIndex * LINE_HEIGHT - container.clientHeight / 3;
-      container.scrollTo({
-        top: Math.max(0, targetScroll),
-        behavior: 'smooth',
-      });
-    }
-  }, [currentIndex]);
-
   const getBorderColor = () => {
     if (mode === 'drop-set') {
       return currentPhase === 'sprint' ? THEME.sprint : THEME.normal;
     }
     return THEME.primary;
   };
+
+  // 현재 단어를 화면 중앙에 유지하기 위한 Y 오프셋 계산
+  const containerOffset = -currentIndex * LINE_HEIGHT;
 
   return (
     <div className="fixed inset-0 z-50 bg-warm-50 flex flex-col">
@@ -74,7 +62,7 @@ export function BlindReader({
             <SkipBack className="w-5 h-5 text-gray-600" />
           </button>
           <div className="text-sm text-gray-600">
-            <span className="font-bold text-gray-800">{currentIndex}</span>
+            <span className="font-bold text-gray-800">{currentIndex + 1}</span>
             <span> / {words.length} 단어</span>
           </div>
         </div>
@@ -108,18 +96,24 @@ export function BlindReader({
       </div>
 
       {/* Word display area */}
-      <div
-        ref={containerRef}
-        className="flex-1 overflow-hidden relative"
-      >
-        {/* Focus line indicator */}
+      <div className="flex-1 overflow-hidden relative flex items-center justify-center">
+        {/* Focus line indicator - 화면 중앙 */}
         <div
-          className="absolute left-0 right-0 h-px bg-amber-300/50 pointer-events-none z-10"
-          style={{ top: '33%' }}
+          className="absolute left-0 right-0 h-0.5 bg-amber-400/30 pointer-events-none z-10"
+          style={{ top: '50%' }}
         />
 
-        {/* Words container */}
-        <div className="flex flex-col items-center pt-[33vh] pb-[67vh] px-4">
+        {/* Words container - Framer Motion으로 Y축 이동 */}
+        <motion.div
+          className="flex flex-col items-center"
+          animate={{ y: containerOffset }}
+          transition={{
+            type: 'spring',
+            stiffness: 300,
+            damping: 30,
+            mass: 0.8,
+          }}
+        >
           {words.map((word, idx) => {
             const isCurrent = idx === currentIndex;
             const isPast = idx < currentIndex;
@@ -139,10 +133,10 @@ export function BlindReader({
                   scale: style.scale,
                   filter: `blur(${style.blur}px)`,
                 }}
-                transition={{ duration: 0.15, ease: 'easeOut' }}
+                transition={{ duration: 0.1, ease: 'easeOut' }}
               >
                 <span
-                  className="text-2xl md:text-4xl font-medium transition-colors duration-150"
+                  className="text-3xl md:text-5xl font-bold transition-colors duration-100"
                   style={{
                     color: isCurrent
                       ? mode === 'drop-set' && currentPhase === 'sprint'
@@ -158,7 +152,7 @@ export function BlindReader({
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
 
       {/* Control bar */}
