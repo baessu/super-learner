@@ -29,7 +29,7 @@ type SanityImageSource = {
  * 실제 프로젝트 ID와 데이터셋으로 교체 필요
  */
 export const sanityConfig = {
-  projectId: import.meta.env.VITE_SANITY_PROJECT_ID || 'YOUR_PROJECT_ID',
+  projectId: import.meta.env.VITE_SANITY_PROJECT_ID || '8xz5ndzn',
   dataset: import.meta.env.VITE_SANITY_DATASET || 'production',
   apiVersion: import.meta.env.VITE_SANITY_API_VERSION || '2024-01-01',
   useCdn: true, // Production에서 CDN 사용 (빠른 응답)

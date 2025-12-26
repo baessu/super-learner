@@ -16,9 +16,8 @@ export default defineConfig({
   name: 'default',
   title: 'Super Learner CMS',
 
-  // TODO: 실제 프로젝트 ID로 교체
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'YOUR_PROJECT_ID',
-  dataset: process.env.SANITY_STUDIO_DATASET || 'production',
+  projectId: '8xz5ndzn',
+  dataset: 'production',
 
   plugins: [
     structureTool(),
