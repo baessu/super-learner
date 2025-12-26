@@ -24,6 +24,7 @@ import StroopTest from './games/stroop-test';
 // 도구
 import MajorSystem from './tools/major-system';
 import ReadingDiagnosis from './tools/reading-diagnosis';
+import SpeedTraining from './tools/speed-training';
 
 /**
  * 게임 플레이 페이지 (임시 - 미구현 게임용)
@@ -96,6 +97,7 @@ function App() {
           {/* 도구들 */}
           <Route path="/tools/major-system" element={<MajorSystem />} />
           <Route path="/tools/reading-diagnosis" element={<ReadingDiagnosis />} />
+          <Route path="/tools/speed-training" element={<SpeedTraining />} />
           <Route path="/tools/:toolId" element={<ToolPage />} />
         </Routes>
       </Layout>

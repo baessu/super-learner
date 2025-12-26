@@ -4,7 +4,7 @@
  */
 
 import { Link } from 'react-router-dom';
-import { Wrench, Brain, BookOpen, Calculator, Target } from 'lucide-react';
+import { Wrench, Brain, BookOpen, Calculator, Target, Zap } from 'lucide-react';
 
 // 도구 데이터 타입
 interface ToolData {
@@ -38,6 +38,16 @@ const tools: ToolData[] = [
     emoji: '🧠',
     route: '/tools/major-system',
     color: 'from-[#E87C63] to-[#D66B53]',
+    isComingSoon: false,
+  },
+  {
+    id: 'speed-training',
+    name: 'RSVP 속도 훈련',
+    description: '빠른 시각 프레젠테이션으로 읽기 속도를 향상시킵니다',
+    icon: <Zap className="w-5 h-5" />,
+    emoji: '⚡',
+    route: '/tools/speed-training',
+    color: 'from-amber-500 to-orange-500',
     isComingSoon: false,
   },
   {
