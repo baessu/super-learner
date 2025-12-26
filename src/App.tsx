@@ -15,6 +15,7 @@ import { ToolsPage } from './pages/ToolsPage';
 
 // 게임
 import SchulteTable from './games/schulte-table';
+import SchulteLv2 from './games/schulte-lv2';
 import DualNBack from './games/dual-n-back';
 import RandomImages from './games/20-random-images';
 import CameraMind from './games/camera-mind';
@@ -87,6 +88,7 @@ function App() {
 
           {/* 게임들 */}
           <Route path="/game/schulte-table" element={<SchulteTable />} />
+          <Route path="/game/schulte-table-l2" element={<SchulteLv2 />} />
           <Route path="/game/dual-n-back" element={<DualNBack />} />
           <Route path="/game/random-images" element={<RandomImages />} />
           <Route path="/game/camera-mind" element={<CameraMind />} />
