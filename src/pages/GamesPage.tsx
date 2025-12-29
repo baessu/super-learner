@@ -32,9 +32,9 @@ function CategorySection({
     <section className="mb-10">
       {/* 카테고리 헤더 */}
       <div className="flex items-center gap-3 mb-4">
-        <div className={`w-1 h-8 rounded-full bg-gradient-to-b ${info.color}`} />
+        <div className={`category-indicator bg-gradient-to-b ${info.color}`} />
         <div>
-          <h3 className="text-lg font-bold text-gray-800">{info.name}</h3>
+          <h3 className="section-title !mb-0">{info.name}</h3>
           <p className="text-xs text-gray-500">{info.description}</p>
         </div>
         <span className="ml-auto text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded-full">
@@ -64,10 +64,10 @@ export function GamesPage() {
     <div>
       {/* 페이지 헤더 */}
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">
+        <h2 className="page-title">
           두뇌 훈련 게임
         </h2>
-        <p className="text-gray-600">
+        <p className="page-description">
           총 {games.length}개의 게임 중 {availableCount}개를 플레이할 수 있습니다.
         </p>
       </div>

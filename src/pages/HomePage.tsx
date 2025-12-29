@@ -24,9 +24,9 @@ function StatCard({
   color: string;
 }) {
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-4 flex items-center gap-4">
+    <div className="card p-4 flex items-center gap-4">
       <div
-        className={`w-12 h-12 rounded-xl flex items-center justify-center ${color}`}
+        className={`icon-box-lg rounded-xl ${color}`}
       >
         {icon}
       </div>
@@ -59,14 +59,14 @@ function QuickAccessCard({
   return (
     <Link
       to={to}
-      className="group block bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-lg hover:-translate-y-1 transition-all"
+      className="group card-interactive p-6"
     >
-      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 ${color}`}>
+      <div className={`icon-box-xl rounded-2xl mb-4 ${color}`}>
         {icon}
       </div>
       <h3 className="text-lg font-bold text-gray-800 mb-2">{title}</h3>
       <p className="text-sm text-gray-500 mb-4">{description}</p>
-      <div className="flex items-center text-sm font-medium text-indigo-600 group-hover:text-indigo-700">
+      <div className="flex items-center text-sm font-medium text-primary-600 group-hover:text-primary-700">
         {buttonText}
         <svg
           className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
@@ -122,7 +122,7 @@ function RecentHistoryItem({
           <p className="text-xs text-gray-400">{time}</p>
         </div>
       </div>
-      <span className="text-sm font-bold text-indigo-600">+{score.toLocaleString()}</span>
+      <span className="text-sm font-bold text-primary-600">+{score.toLocaleString()}</span>
     </div>
   );
 }
@@ -158,8 +158,8 @@ function GameBestTiersCard({ bestScores }: { bestScores: Record<string, number> 
     .sort((a, b) => b.score - a.score); // 점수 높은 순 정렬
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-5">
-      <h3 className="text-lg font-bold text-gray-800 mb-4">게임별 최고 기록</h3>
+    <div className="card p-5">
+      <h3 className="section-title">게임별 최고 기록</h3>
       <div className="space-y-3">
         {gameWithTiers.map(({ game, tier, score }) => (
           <div
@@ -208,8 +208,8 @@ function TierStatsCard({ tierCounts, totalPlays }: { tierCounts: Record<TierGrad
   const maxCount = Math.max(...Object.values(tierCounts), 1);
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-5">
-      <h3 className="text-lg font-bold text-gray-800 mb-4">티어 통계</h3>
+    <div className="card p-5">
+      <h3 className="section-title">티어 통계</h3>
       <div className="space-y-3">
         {TIER_CONFIG.map(({ grade, color }) => {
           const count = tierCounts[grade];
@@ -317,16 +317,16 @@ export function HomePage() {
       {/* 통계 카드 */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
-          icon={<Trophy className="w-6 h-6 text-indigo-600" />}
+          icon={<Trophy className="w-6 h-6 text-primary-600" />}
           label="총 점수"
           value={totalScore.toLocaleString()}
-          color="bg-indigo-100"
+          color="bg-primary-100"
         />
         <StatCard
-          icon={<Target className="w-6 h-6 text-emerald-600" />}
+          icon={<Target className="w-6 h-6 text-success-600" />}
           label="플레이한 게임"
           value={`${playedGames} / ${availableGames}`}
-          color="bg-emerald-100"
+          color="bg-success-100"
         />
         <StatCard
           icon={<TrendingUp className="w-6 h-6 text-purple-600" />}
@@ -335,7 +335,7 @@ export function HomePage() {
           color="bg-purple-100"
         />
         <StatCard
-          icon={<Clock className="w-6 h-6 text-amber-600" />}
+          icon={<Clock className="w-6 h-6 text-warning-600" />}
           label="오늘 플레이"
           value={
             gameHistory.filter((h) => {
@@ -343,28 +343,28 @@ export function HomePage() {
               return new Date(h.playedAt).toDateString() === today;
             }).length
           }
-          color="bg-amber-100"
+          color="bg-warning-100"
         />
       </div>
 
       {/* 퀵 액세스 */}
       <div>
-        <h3 className="text-lg font-bold text-gray-800 mb-4">바로가기</h3>
+        <h3 className="section-title">바로가기</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <QuickAccessCard
             to="/games"
-            icon={<Gamepad2 className="w-7 h-7 text-indigo-600" />}
+            icon={<Gamepad2 className="w-7 h-7 text-primary-600" />}
             title="두뇌 훈련 게임"
             description="슐테 테이블, 듀얼 엔백 등 다양한 두뇌 훈련 게임을 플레이하세요."
-            color="bg-indigo-100"
+            color="bg-primary-100"
             buttonText="게임 보기"
           />
           <QuickAccessCard
             to="/tools"
-            icon={<Wrench className="w-7 h-7 text-[#E87C63]" />}
+            icon={<Wrench className="w-7 h-7 text-accent-400" />}
             title="학습 도구"
             description="기억술 변환기 등 기억력 향상을 위한 실용적인 도구를 사용하세요."
-            color="bg-[#FEF2F0]"
+            color="bg-accent-50"
             buttonText="도구 보기"
           />
         </div>
@@ -382,9 +382,9 @@ export function HomePage() {
           <TierStatsCard tierCounts={tierCounts} totalPlays={totalPlays} />
 
           {/* 최근 기록 */}
-          <div className="bg-white rounded-2xl border border-gray-200 p-5">
+          <div className="card p-5">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-bold text-gray-800">최근 기록</h3>
+              <h3 className="section-title !mb-0">최근 기록</h3>
             </div>
             <div>
               {recentHistory.map((entry) => (
@@ -402,8 +402,8 @@ export function HomePage() {
 
       {/* 빈 상태 */}
       {recentHistory.length === 0 && (
-        <div className="bg-gray-50 rounded-2xl p-8 text-center">
-          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="empty-state">
+          <div className="w-16 h-16 bg-warm-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <Gamepad2 className="w-8 h-8 text-gray-400" />
           </div>
           <h3 className="text-lg font-bold text-gray-800 mb-2">아직 플레이 기록이 없어요</h3>
@@ -412,7 +412,7 @@ export function HomePage() {
           </p>
           <Link
             to="/games"
-            className="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-700 transition-colors"
+            className="btn btn-primary px-6 py-3"
           >
             게임 시작하기
           </Link>

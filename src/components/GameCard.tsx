@@ -69,8 +69,8 @@ function DifficultyStars({ difficulty }: { difficulty: number }) {
           key={i}
           className={`w-3 h-3 ${
             i < difficulty
-              ? 'fill-amber-400 text-amber-400'
-              : 'fill-gray-200 text-gray-200'
+              ? 'star-filled'
+              : 'star-empty'
           }`}
         />
       ))}
@@ -91,9 +91,8 @@ export function GameCard({ game, bestScore }: GameCardProps) {
     >
       <div
         className={`
-          bg-white rounded-2xl shadow-sm border border-warm-200 overflow-hidden
-          transition-all duration-300
-          ${isAvailable ? 'hover:shadow-lg hover:-translate-y-1' : ''}
+          card overflow-hidden
+          ${isAvailable ? 'card-hover' : ''}
           ${!isAvailable ? 'grayscale opacity-60' : ''}
         `}
       >
@@ -118,13 +117,7 @@ export function GameCard({ game, bestScore }: GameCardProps) {
           {/* 준비 중 배지 - grayscale 해제하여 잘 보이게 */}
           {!isAvailable && (
             <span
-              className="
-                absolute top-2 right-2
-                bg-gray-800 text-white text-xs font-medium
-                px-2.5 py-1 rounded-full
-                filter-none opacity-100
-                shadow-md
-              "
+              className="absolute top-2 right-2 badge badge-dark shadow-md"
               style={{ filter: 'none' }}
             >
               준비 중
@@ -162,7 +155,7 @@ export function GameCard({ game, bestScore }: GameCardProps) {
             <div
               className={`
                 flex items-center text-xs font-medium
-                ${isAvailable ? 'text-indigo-600' : 'text-gray-400'}
+                ${isAvailable ? 'text-primary-600' : 'text-gray-400'}
               `}
             >
               {isAvailable ? '시작하기' : '곧 출시'}
@@ -202,7 +195,7 @@ export function GameCard({ game, bestScore }: GameCardProps) {
                     );
                   })()
                 ) : (
-                  <div className="flex items-center text-orange-500">
+                  <div className="flex items-center text-warning-500">
                     <span className="mr-1">🔥</span>
                     <span>도전!</span>
                   </div>

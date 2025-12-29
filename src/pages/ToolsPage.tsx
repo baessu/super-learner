@@ -27,7 +27,7 @@ const tools: ToolData[] = [
     icon: <Target className="w-5 h-5" />,
     emoji: '📊',
     route: '/tools/reading-diagnosis',
-    color: 'from-blue-500 to-indigo-500',
+    color: 'from-primary-500 to-primary-600',
     isComingSoon: false,
   },
   {
@@ -37,7 +37,7 @@ const tools: ToolData[] = [
     icon: <Brain className="w-5 h-5" />,
     emoji: '🧠',
     route: '/tools/major-system',
-    color: 'from-[#E87C63] to-[#D66B53]',
+    color: 'from-accent-400 to-accent-500',
     isComingSoon: false,
   },
   {
@@ -47,7 +47,7 @@ const tools: ToolData[] = [
     icon: <Zap className="w-5 h-5" />,
     emoji: '⚡',
     route: '/tools/speed-training',
-    color: 'from-amber-500 to-orange-500',
+    color: 'from-warning-400 to-warning-500',
     isComingSoon: false,
   },
   {
@@ -57,7 +57,7 @@ const tools: ToolData[] = [
     icon: <BookOpen className="w-5 h-5" />,
     emoji: '🏛️',
     route: '/tools/memory-palace',
-    color: 'from-purple-500 to-indigo-500',
+    color: 'from-purple-500 to-primary-500',
     isComingSoon: true,
   },
   {
@@ -67,7 +67,7 @@ const tools: ToolData[] = [
     icon: <Calculator className="w-5 h-5" />,
     emoji: '📚',
     route: '/tools/spaced-repetition',
-    color: 'from-emerald-500 to-teal-500',
+    color: 'from-success-500 to-success-600',
     isComingSoon: true,
   },
 ];
@@ -81,9 +81,8 @@ function ToolCard({ tool }: { tool: ToolData }) {
   const content = (
     <div
       className={`
-        bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden
-        transition-all duration-300
-        ${isAvailable ? 'hover:shadow-lg hover:-translate-y-1' : ''}
+        card overflow-hidden
+        ${isAvailable ? 'card-hover' : ''}
         ${!isAvailable ? 'grayscale opacity-60' : ''}
       `}
     >
@@ -103,7 +102,7 @@ function ToolCard({ tool }: { tool: ToolData }) {
         {/* 준비 중 배지 */}
         {!isAvailable && (
           <span
-            className="absolute top-3 right-3 bg-gray-800 text-white text-xs font-medium px-2.5 py-1 rounded-full shadow-md"
+            className="absolute top-3 right-3 badge badge-dark shadow-md"
             style={{ filter: 'none' }}
           >
             준비 중
@@ -116,8 +115,8 @@ function ToolCard({ tool }: { tool: ToolData }) {
         <div className="flex items-start gap-3 mb-3">
           <div
             className={`
-              w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0
-              ${isAvailable ? 'bg-[#FEF2F0] text-[#E87C63]' : 'bg-gray-100 text-gray-400'}
+              icon-box-md rounded-xl
+              ${isAvailable ? 'bg-accent-50 text-accent-400' : 'bg-gray-100 text-gray-400'}
             `}
           >
             {tool.icon}
@@ -132,7 +131,7 @@ function ToolCard({ tool }: { tool: ToolData }) {
         <div
           className={`
             flex items-center text-sm font-medium
-            ${isAvailable ? 'text-[#E87C63]' : 'text-gray-400'}
+            ${isAvailable ? 'text-accent-400' : 'text-gray-400'}
           `}
         >
           <Wrench className="w-4 h-4 mr-1.5" />
@@ -175,15 +174,15 @@ export function ToolsPage() {
     <div>
       {/* 페이지 헤더 */}
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">학습 도구</h2>
-        <p className="text-gray-600">
+        <h2 className="page-title">학습 도구</h2>
+        <p className="page-description">
           기억력 향상을 위한 {tools.length}개의 도구 중 {availableCount}개를 사용할
           수 있습니다.
         </p>
       </div>
 
       {/* 도구 설명 */}
-      <div className="mb-8 p-5 bg-gradient-to-r from-[#FEF2F0] to-orange-50 rounded-2xl border border-[#FADAD4]">
+      <div className="info-box mb-8">
         <h3 className="font-bold text-gray-800 mb-2">💡 학습 도구란?</h3>
         <p className="text-sm text-gray-600">
           게임과 달리 점수를 측정하지 않고, 기억술 기법을 연습하고 활용할 수 있는
